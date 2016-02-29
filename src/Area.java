@@ -88,7 +88,8 @@ protected void drawTiles() {
     // TODO: Implement in a child class.
   }
 protected void drawBoats(){
-	
+	Boat b = new Boat(300,500);
+	b.draw(g2);
 }
 
 }
