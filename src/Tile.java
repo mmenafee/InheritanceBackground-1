@@ -1,17 +1,21 @@
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 public class Tile extends Area
 {
-	  private BufferedImage tileImage;
+	  protected BufferedImage tileImage;
 	  
 	  public Tile(String fileName) {
 		    // Load the tile image from the file.
 		    try {
+		    	
 		    	tileImage = ImageIO.read(new URL("file:" + fileName));
+		    	
 		    } catch (IOException e) {
 		      System.out.println("Failed to load" + fileName + "image.");
 		    }
