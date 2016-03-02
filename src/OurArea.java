@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.lang.reflect.Array;
 
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 public class OurArea extends Area implements ActionListener , KeyListener{
@@ -32,7 +33,7 @@ public class OurArea extends Area implements ActionListener , KeyListener{
   /**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 // The constructor for OurArea. It takes in a parameter for the
   // number of trees to place in the area.
   private Timer clock = new Timer(1, this);
@@ -78,6 +79,7 @@ public class OurArea extends Area implements ActionListener , KeyListener{
     for(int x = 0; x < 10; x++){
     	for(int y = 0;y < 3;y++){
     		tiles[x][y] = tree;
+    		
     		//preloads frames so gif isn't so slow
     for(int i=0;i<11;i++){
     	 frames[i] = new Ocean("frame_"+ i + "_delay-0.1s.gif");
@@ -144,25 +146,44 @@ public void actionPerformed(ActionEvent e)
  	if(p == 11){
  		p = 1;
   	}
- 	//checking if boolean are true every 20 milliseconds
+ 	//checking if booleans are true every 20 milliseconds
  	if(e.getSource() == clock){
  		if(upKey == true){
- 			Boat.set_location(boats[0].get_x(),boats[0].get_y()-5);
+ 			//boundaries for beach
+ 			if(boats[0].get_y() > 300)
+ 				Boat.set_location(boats[0].get_x(),boats[0].get_y()-5);
+ 			else{
+ 				JOptionPane.showMessageDialog(null, "You Landed On the Beach");
+ 				upKey = false;
+ 			}
  		}
+ 	}
  		if(downKey == true){
  			Boat.set_location(boats[0].get_x(),boats[0].get_y()+5);
  		}
  		if(rightKey == true){
- 			Boat.set_location(boats[0].get_x()+5,boats[0].get_y());
+ 			
+ 			if(boats[0].get_y() > 300)
+ 				Boat.set_location(boats[0].get_x()+5,boats[0].get_y());
+ 			else
+ 				JOptionPane.showMessageDialog(null, "You Landed On the Beach");
+ 				upKey = false;
  		}
  		if(leftKey == true){
- 			Boat.set_location(boats[0].get_x()-5,boats[0].get_y());
- 		}
+ 			
+ 			if(boats[0].get_y() > 300)
+ 				Boat.set_location(boats[0].get_x()-5,boats[0].get_y());
+ 			else
+ 				JOptionPane.showMessageDialog(null, "You Landed On the Beach");
+ 				upKey = false;
  		
  	}
-}
+
 	repaint();
+ 	}
 }
+
+
 
 
 
